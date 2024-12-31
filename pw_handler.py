@@ -183,7 +183,7 @@ async def handle_subject_ids(update: Update, context: ContextTypes.DEFAULT_TYPE)
             # Send the file to the user
             try:
                 with open(file_path, 'rb') as file:
-                    await update.message.reply_document(file, caption=f"Contents for 𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆😶‍🌫️: ```{batch_name}```.")
+                    await update.message.reply_document(file, caption=f"Contents for 𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆😶‍🌫️: ```{subject_name}```.")
             except Exception as e:
                 await update.message.reply_text(f"Error sending file to user: {e}")
                 continue
