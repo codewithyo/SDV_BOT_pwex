@@ -26,7 +26,8 @@ if __name__ == "__main__":
 
     # Handlers
     async def start(update, context):
-        await update.message.reply_text("Hi! Use /pw to start processing your batches.")
+        await update.message.reply_text("𝐻𝑒𝑙𝑙𝑜 𝑢𝑠𝑒𝑟  😉 𝐼'𝑚 𝐴 𝑆𝑖𝑚𝑝𝑙𝑒 𝐵𝑎𝑡𝑐ℎ 𝑡𝑜 𝑇𝑥𝑇 𝑒𝑥𝑡𝑟𝑎𝑐𝑡𝑜𝑟 𝐵𝑜𝑡 
+𝑈𝑠𝑒 𝑡ℎ𝑖𝑠 𝑐𝑜𝑚𝑚𝑎𝑛𝑑🫠 /pw 𝑎𝑛𝑑 𝑠𝑒𝑛𝑑 𝑦𝑜𝑢𝑟 𝑎𝑢𝑡ℎ_𝑐𝑜𝑑𝑒 [𝑇𝑜𝑘𝑒𝑛]💢")
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(pw_handler)  # Adding /pw command handler
