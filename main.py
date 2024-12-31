@@ -21,7 +21,7 @@ if __name__ == "__main__":
     flask_thread.start()
 
     # Telegram Bot setup
-    BOT_TOKEN = "8071764665:AAF5zG5aZtfA0fWAPbDm14LDGbbLxs-dcN0"
+    BOT_TOKEN = "USER_BOT_TOKEN"
     application = ApplicationBuilder().token(BOT_TOKEN).build()
 
     # Handlers
