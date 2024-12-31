@@ -50,7 +50,7 @@ def get_batches(auth_code):
                 batch_id = batch["_id"]
                 name = batch["name"]
                 price = batch.get("feeId", {}).get("total", "Free")
-                result += f"Batch ID: ```{batch_id}```\nBatch Name: ```{name}```\nPrice: ```{price}```\n\n"
+                result += f"𝑩𝒂𝒕𝒄𝒉 𝑰𝑫💡: ```{batch_id}```\n𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆😶‍🌫️: ```{name}```\nⓅ︎Ⓡ︎Ⓘ︎Ⓒ︎Ⓔ︎🤑: ```{price}```\n\n"
     except ValueError as ve:
         logging.error(f"Token Error: {ve}")
         return "TOKEN_ERROR"
@@ -106,7 +106,7 @@ def save_batch_contents(batch_name, subject_name, subject_data):
 
 # Bot Handlers
 async def pw_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Send your authentication code:")
+    await update.message.reply_text("𝕊𝕖𝕟𝕕 𝕪𝕠𝕦𝕣 𝕒𝕦𝕥𝕙𝕖𝕟𝕥𝕚𝕔𝕒𝕥𝕚𝕠𝕟 𝕔𝕠𝕕𝕖😗[𝕋𝕠𝕜𝕖𝕟]:")
     return AUTH_CODE
 
 async def handle_auth_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -127,7 +127,7 @@ async def handle_auth_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return ConversationHandler.END
 
         await update.message.reply_text(
-            f"Your Batches:\n\n{batches}\n\nSend the Batch ID to proceed:",
+            f"Your Batches😉:\n\n{batches}\n\nSend the Batch ID to proceed:",
             parse_mode="Markdown",
         )
         return BATCH_ID
@@ -151,7 +151,7 @@ async def handle_batch_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return ConversationHandler.END
 
     subject_list = "\n".join([f"{subject['_id']}: {subject['subject']}" for subject in subjects])
-    await update.message.reply_text(f"Subjects found:\n{subject_list}\n\nSend the Subject ID(s) to fetch contents (separate multiple IDs with '&'):")
+    await update.message.reply_text(f"𝚂𝚞𝚋𝚓𝚎𝚌𝚝𝚜 𝚏𝚘𝚞𝚗𝚍:\n{subject_list}\n\n𝚂𝚎𝚗𝚍 𝚝𝚑𝚎 𝚂𝚞𝚋𝚓𝚎𝚌𝚝 𝙸𝙳(s) to fetch contents (separate multiple IDs with '&'):")
     context.user_data['subjects'] = subjects
     return SUBJECT_IDS
 
@@ -208,7 +208,7 @@ async def handle_subject_ids(update: Update, context: ContextTypes.DEFAULT_TYPE)
             except Exception as e:
                 logging.error(f"Error deleting temporary file: {e}")
         else:
-            await update.message.reply_text(f"No content found for subject ID {subject_id}.")
+            await update.message.reply_text(f"No content found for subject ID🤐 {subject_id}.")
 
     return ConversationHandler.END
 
