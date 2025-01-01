@@ -1,7 +1,8 @@
 import logging
 from flask import Flask
 from telegram.ext import ApplicationBuilder, CommandHandler
-from pw_handler import pw_handler  # Importing pw_handler
+from pw_handler import pw_handler
+from ak_handler import ak_handler  # Importing pw_handler
 
 # Logging Setup
 logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
@@ -26,10 +27,10 @@ if __name__ == "__main__":
 
     # Handlers
     async def start(update, context):
-        await update.message.reply_text("𝐻𝑒𝑙𝑙𝑜 𝑢𝑠𝑒𝑟  😉 𝐼'𝑚 𝐴 𝑆𝑖𝑚𝑝𝑙𝑒 𝐵𝑎𝑡𝑐ℎ 𝑡𝑜 𝑇𝑥𝑇 𝑒𝑥𝑡𝑟𝑎𝑐𝑡𝑜𝑟 𝐵𝑜𝑡\n\n𝑈𝑠𝑒 𝑡ℎ𝑖𝑠 𝑐𝑜𝑚𝑚𝑎𝑛𝑑🫠 /𝑝𝑤 𝑎𝑛𝑑 𝑠𝑒𝑛𝑑 𝑦𝑜𝑢𝑟 𝑎𝑢𝑡ℎ_𝑐𝑜𝑑𝑒 [𝑇𝑜𝑘𝑒𝑛]💢")
+        await update.message.reply_text("𝐻𝑒𝑙𝑙𝑜 𝑢𝑠𝑒𝑟  😉 𝐼'𝑚 𝐴 𝑆𝑖𝑚𝑝𝑙𝑒 𝐵𝑎𝑡𝑐ℎ 𝑡𝑜 𝑇𝑥𝑇 𝑒𝑥𝑡𝑟𝑎𝑐𝑡𝑜𝑟 𝐵𝑜𝑡\n\n𝑈𝑠𝑒 𝑡ℎ𝑖𝑠 𝑐𝑜𝑚𝑚𝑎𝑛𝑑🫠 /pw , /ak 𝑎𝑛𝑑 𝑠𝑒𝑛𝑑 𝑦𝑜𝑢𝑟 𝑎𝑢𝑡ℎ_𝑐𝑜𝑑𝑒 [𝑇𝑜𝑘𝑒𝑛]💢")
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(pw_handler)  # Adding /pw command handler
-
+application.add_handler(ak_handler)
     # Run Bot
     application.run_polling()
