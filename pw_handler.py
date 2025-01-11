@@ -10,9 +10,9 @@ from telegram.ext import (
     ContextTypes,
     filters,
 )
+from config import LOG_GROUP_ID  # Import LOG_GROUP_ID from config
 
 # Constants
-LOG_GROUP_ID = -1002385500773
 ROOT_DIR = os.getcwd()
 
 # Stages for ConversationHandler
@@ -59,7 +59,7 @@ def get_batches(auth_code):
         return None
 
     return result
-    
+
 def get_subjects(batch_id, auth_code):
     headers = {
         'authorization': f"Bearer {auth_code}",
@@ -106,7 +106,7 @@ def save_batch_contents(batch_name, subject_name, subject_data):
 
 # Bot Handlers
 async def pw_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("𝕊𝕖𝕟𝕕 𝕪𝕠𝕦𝕣 𝕒𝕦𝕥𝕙𝕖𝕟𝕥𝕚𝕔𝕒𝕥𝕚𝕠𝕟 𝕔𝕠𝕕𝕖😗[𝕋𝕠𝕜𝕖𝕟]:")
+    await update.message.reply_text("𝕊𝕖𝕟𝕕 𝕪𝕠𝕦𝕣 ℙ𝕎 𝕒𝕦𝕥𝕙𝕖𝕟𝕥𝕚𝕔𝕒𝕥𝕚𝕠𝕟 𝕔𝕠𝕕𝕖😗[𝕋𝕠𝕜𝕖𝕟]:")
     return AUTH_CODE
 
 async def handle_auth_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -115,11 +115,11 @@ async def handle_auth_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['auth_code'] = auth_code
 
         # Fetch Batches
-        await update.message.reply_text("Fetching your batches. Please wait...")
+        await update.message.reply_text("𝐅𝐞𝐭𝐜𝐡𝐢𝐧𝐠 𝐘𝐨𝐮𝐫 𝐁𝐚𝐭𝐜𝐡𝐞𝐬. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐖𝐚𝐢𝐭✋...")
         batches = get_batches(auth_code)
 
         if batches == "TOKEN_ERROR":
-            await update.message.reply_text("Invalid or expired token. Please provide a valid token.")
+            await update.message.reply_text("𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐨𝐫 𝐄𝐱𝐩𝐢𝐫𝐞𝐝 𝐓𝐨𝐤𝐞𝐧. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐏𝐫𝐨𝐯𝐢𝐝𝐞 𝐀 𝐕𝐚𝐥𝐢𝐝 𝐓𝐨𝐤𝐞𝐧👀.")
             return ConversationHandler.END
 
         if not batches or not batches.strip():
@@ -127,7 +127,7 @@ async def handle_auth_code(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return ConversationHandler.END
 
         await update.message.reply_text(
-            f"Your Batches😉:\n\n{batches}\n\nSend the Batch ID to proceed:",
+            f"𝒀𝒐𝒖𝒓 𝑩𝒂𝒕𝒄𝒉𝒆𝒔😉:\n\n{batches}\n\n𝑺𝒆𝒏𝒅 𝒕𝒉𝒆 𝑩𝒂𝒕𝒄𝒉 𝑰𝑫 𝑻𝑶 𝑷𝒓𝒐𝒄𝒆𝒆𝒅⏳:",
             parse_mode="Markdown",
         )
         return BATCH_ID
@@ -147,7 +147,7 @@ async def handle_batch_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Fetch Subjects
     subjects = get_subjects(batch_id, auth_code)
     if not subjects:
-        await update.message.reply_text("No subjects found for this batch.")
+        await update.message.reply_text("𝑁𝑜 𝑠𝑢𝑏𝑗𝑒𝑐𝑡𝑠 𝑓𝑜𝑢𝑛𝑑 𝑓𝑜𝑟 𝑡ℎ𝑖𝑠 𝑏𝑎𝑡𝑐ℎ.")
         return ConversationHandler.END
 
     subject_list = "\n".join([f"{subject['_id']}: {subject['subject']}" for subject in subjects])
@@ -162,7 +162,7 @@ async def handle_subject_ids(update: Update, context: ContextTypes.DEFAULT_TYPE)
     subjects = context.user_data['subjects']
 
     subject_ids = update.message.text.strip().split('&')
-    await update.message.reply_text("Link extraction started. Please wait...")
+    await update.message.reply_text("𝐋𝐢𝐧𝐤 𝐞𝐱𝐭𝐫𝐚𝐜𝐭𝐢𝐨𝐧 𝐬𝐭𝐚𝐫𝐭𝐞𝐝. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐰𝐚𝐢𝐭✋️...")
 
     for subject_id in subject_ids:
         page = 1
@@ -183,7 +183,7 @@ async def handle_subject_ids(update: Update, context: ContextTypes.DEFAULT_TYPE)
             # Send the file to the user
             try:
                 with open(file_path, 'rb') as file:
-                    await update.message.reply_document(file, caption=f"Contents for 𝑩𝒂𝒕𝒄𝒉 𝑵𝒂𝒎𝒆😶‍🌫️: ```{subject_name}```.")
+                    await update.message.reply_document(file, caption=f"Contents for 𝑵𝒂𝒎𝒆😶‍🌫️: ```{subject_name}```.")
             except Exception as e:
                 await update.message.reply_text(f"Error sending file to user: {e}")
                 continue
@@ -208,7 +208,7 @@ async def handle_subject_ids(update: Update, context: ContextTypes.DEFAULT_TYPE)
             except Exception as e:
                 logging.error(f"Error deleting temporary file: {e}")
         else:
-            await update.message.reply_text(f"No content found for subject ID🤐 {subject_id}.")
+            await update.message.reply_text(f"𝐍𝐨 𝐜𝐨𝐧𝐭𝐞𝐧𝐭 𝐟𝐨𝐮𝐧𝐝 𝐟𝐨𝐫 𝐬𝐮𝐛𝐣𝐞𝐜𝐭 𝐈𝐃🤐 {subject_id}.")
 
     return ConversationHandler.END
 
