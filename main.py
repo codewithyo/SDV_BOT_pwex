@@ -11,7 +11,7 @@ logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
 app = Flask(__name__)
 
 # Owner's Telegram ID (replace with your actual ID)
-OWNER_ID = 6877021488  # Set the owner's Telegram ID here
+OWNER_ID = 123456789  # Set the owner's Telegram ID here
 allowed_users = set()  # This will store the allowed user IDs
 is_function_enabled = False  # This flag will manage the function on/off state
 
@@ -40,9 +40,9 @@ async def off_owner(update, context):
 
 async def add_id(update, context):
     if update.message.from_user.id == OWNER_ID:
-        if context.args:
-            user_id = int(context.args[0])
-            allowed_users.add(user_id)
+        if context.args:  # Check if arguments are provided
+            user_id = int(context.args[0])  # Convert the first argument to an integer
+            allowed_users.add(user_id)  # Add the user ID to the allowed list
             await update.message.reply_text(f"User ID {user_id} has been added to the allowed list.")
         else:
             await update.message.reply_text("Please provide the user ID to add.")
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("onowner", on_owner))
     application.add_handler(CommandHandler("offowner", off_owner))
-    application.add_handler(CommandHandler("addid", add_id, pass_args=True))
+    application.add_handler(CommandHandler("addid", add_id))  # No need for pass_args=True
 
     # Add the permission check before handling the messages
     application.add_handler(pw_handler)
