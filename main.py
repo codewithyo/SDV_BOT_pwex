@@ -11,7 +11,7 @@ logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
 app = Flask(__name__)
 
 # Owner's Telegram ID (replace with your actual ID)
-OWNER_ID = 123456789  # Set the owner's Telegram ID here
+OWNER_ID = 6877021488  # Set the owner's Telegram ID here
 allowed_users = set()  # This will store the allowed user IDs
 is_function_enabled = False  # This flag will manage the function on/off state
 
