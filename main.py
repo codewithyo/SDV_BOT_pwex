@@ -1,7 +1,8 @@
 import logging
 from flask import Flask
 from telegram.ext import ApplicationBuilder, CommandHandler
-from pw_handler import pw_handler  # Import the new handler
+from pw_handler import pw_handler 
+from kgs_handler import kgs_handler # Import the new handler
 from config import BOT_TOKEN
 
 logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
@@ -28,5 +29,6 @@ if __name__ == "__main__":
         await update.message.reply_text("𝐻𝑒𝑙𝑙𝑜 𝑢𝑠𝑒𝑟  😉 𝐼'𝑚 𝐴 𝑆𝑖𝑚𝑝𝑙𝑒 𝐵𝑎𝑡𝑐ℎ 𝑡𝑜 𝑇𝑥𝑇 𝑒𝑥𝑡𝑟𝑎𝑐𝑡𝑜𝑟 𝐵𝑜𝑡\n\n𝑈𝑠𝑒 𝑡ℎ𝑒𝑠𝑒 𝑐𝑜𝑚𝑚𝑎𝑛𝑑𝑠:\n🫠 /pw - 𝑓𝑜𝑟 𝑃𝑊 𝑐𝑜𝑛𝑡𝑒𝑛𝑡\n🫠 /kgs - 𝑓𝑜𝑟 𝑲𝒉𝒂𝒏 𝑮𝒍𝒐𝒃𝒂𝒍 𝑺𝒕𝒖𝒅𝒊𝒆𝒔 𝑐𝑜𝑛𝑡𝑒𝑛𝑡")
 
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(pw_handler) # Add the new IIT handler
+    application.add_handler(pw_handler)
+    application.add_handler(kgs_handler)   # Add the new IIT handler
     application.run_polling()
