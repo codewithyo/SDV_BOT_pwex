@@ -11,6 +11,10 @@ from telegram.ext import (
 )
 from config import LOG_GROUP_ID
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 # Conversation states
 LOGIN_CHOICE, USER_ID, PASSWORD_OR_TOKEN, BATCH_SELECTION = range(4)
 
@@ -41,7 +45,7 @@ async def handle_login_choice(update: Update, context: ContextTypes.DEFAULT_TYPE
         return USER_ID
 
     except Exception as e:
-        logging.error(f"Error in handle_login_choice: {e}")
+        logger.error(f"Error in handle_login_choice: {e}")
         await update.message.reply_text("An error occurred. Please try again later.")
         return ConversationHandler.END
 
@@ -58,7 +62,7 @@ async def handle_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return PASSWORD_OR_TOKEN
 
     except Exception as e:
-        logging.error(f"Error in handle_user_id: {e}")
+        logger.error(f"Error in handle_user_id: {e}")
         await update.message.reply_text("An error occurred. Please try again later.")
         return ConversationHandler.END
 
@@ -143,7 +147,7 @@ async def handle_password_or_token(update: Update, context: ContextTypes.DEFAULT
         return BATCH_SELECTION
 
     except Exception as e:
-        logging.error(f"Error in handle_password_or_token: {e}")
+        logger.error(f"Error in handle_password_or_token: {e}")
         await update.message.reply_text("An error occurred during login. Please try again later.")
         return ConversationHandler.END
 
@@ -198,7 +202,7 @@ async def handle_batch_selection(update: Update, context: ContextTypes.DEFAULT_T
                         full_content += f"{title}: {video_url}\n"
 
             except Exception as e:
-                logging.error(f"Error processing lesson {lesson['id']}: {e}")
+                logger.error(f"Error processing lesson {lesson['id']}: {e}")
                 continue
 
         if full_content:
@@ -240,7 +244,7 @@ async def handle_batch_selection(update: Update, context: ContextTypes.DEFAULT_T
         return ConversationHandler.END
 
     except Exception as e:
-        logging.error(f"Error in handle_batch_selection: {e}")
+        logger.error(f"Error in handle_batch_selection: {e}")
         await update.message.reply_text("An error occurred during content extraction. Please try again later.")
         return ConversationHandler.END
 
